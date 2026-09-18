@@ -1,4 +1,6 @@
 ---
+import TechIcon from './TechIcon.astro';
+
 const links = [
   { href: '/', label: 'Inicio' },
   { href: '/sobre-mi', label: 'Sobre mí' },
@@ -9,21 +11,41 @@ const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
 ---
 
-<header class="border-b border-border bg-bg/80 backdrop-blur sticky top-0 z-10">
-  <nav class="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-    <a href="/" class="font-mono font-semibold text-accent">0V3R</a>
-    <ul class="flex gap-4 sm:gap-6 text-sm">
+<header class="sticky top-0 z-20 border-b border-grid/70 bg-night/85 backdrop-blur-md">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-3 sm:gap-6">
+    <a href="/" class="display text-xl text-paper flex items-center gap-2 shrink-0">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-signal" aria-hidden="true"></span>
+      0V3R
+    </a>
+    <ul class="flex items-center gap-0 sm:gap-2">
       {links.map(({ href, label }) => (
         <li>
           <a
             href={href}
-            class:list={['hover:text-fg transition-colors', isActive(href) ? 'text-fg' : 'text-muted']}
+            class:list={[
+              'relative whitespace-nowrap px-2 sm:px-3 py-1.5 text-sm sm:text-[15px] rounded-md transition-colors',
+              isActive(href) ? 'text-paper' : 'text-haze hover:text-paper hover:bg-chart',
+            ]}
             aria-current={isActive(href) ? 'page' : undefined}
           >
             {label}
+            {isActive(href) && (
+              <span class="absolute left-3 right-3 -bottom-[13px] h-0.5 bg-signal rounded-full" aria-hidden="true"></span>
+            )}
           </a>
         </li>
       ))}
+      <li class="hidden sm:block pl-2 ml-1 border-l border-grid">
+        <a
+          href="https://github.com/N0Namesir"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex p-2 rounded-md text-haze hover:text-paper hover:bg-chart transition-colors"
+          aria-label="GitHub de Eduardo Rivas"
+        >
+          <TechIcon name="GitHub" size={18} />
+        </a>
+      </li>
     </ul>
   </nav>
 </header>

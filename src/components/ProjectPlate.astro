@@ -1,0 +1,60 @@
+---
+import { ArrowUpRight, Library, Activity, FolderGit2 } from '@lucide/astro';
+import TechChip from './TechChip.astro';
+
+interface Props {
+  slug: string;
+  nombre: string;
+  descripcion: string;
+  stack: string[];
+  url?: string;
+  flip?: boolean;
+}
+
+const { slug, nombre, descripcion, stack, url, flip = false } = Astro.props;
+const emblem: Record<string, typeof Library> = {
+  'muro-informativo': Library,
+  'epi-aetheris': Activity,
+};
+const Emblem = emblem[slug] ?? FolderGit2;
+const host = url ? new URL(url).host : undefined;
+---
+
+<article
+  class:list={[
+    'group relative grid gap-6 md:gap-10 md:grid-cols-12 items-center rounded-2xl border border-grid bg-chart/60 p-6 sm:p-8 transition-colors hover:border-signal/60',
+  ]}
+>
+  <a href={`/proyectos/${slug}`} class="absolute inset-0 rounded-2xl" aria-label={`Ver ${nombre}`}></a>
+
+  <div class:list={['md:col-span-5', flip && 'md:order-2']}>
+    <div class="relative aspect-[4/3] rounded-xl bg-night border border-grid overflow-hidden gridlines">
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="relative">
+          <span class="absolute -inset-6 rounded-full bg-signal/10 blur-2xl" aria-hidden="true"></span>
+          <Emblem size={88} stroke-width={1.2} class="relative text-signal" />
+        </div>
+      </div>
+      {host && (
+        <span class="absolute left-4 bottom-3 text-sm text-haze">{host}</span>
+      )}
+    </div>
+  </div>
+
+  <div class:list={['md:col-span-7 flex flex-col gap-4', flip && 'md:order-1']}>
+    <h3 class="display text-2xl sm:text-3xl text-paper flex items-start gap-3">
+      <span>{nombre}</span>
+      <ArrowUpRight
+        size={26}
+        class="mt-1 shrink-0 text-haze transition-all group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+      />
+    </h3>
+    <p class="text-haze text-lg max-w-[52ch]">{descripcion}</p>
+    <ul class="flex flex-wrap gap-2 relative z-10 pointer-events-none">
+      {stack.slice(0, 6).map((tech) => <TechChip name={tech} />)}
+      {stack.length > 6 && (
+        <li class="inline-flex items-center px-2.5 py-1 text-[13px] text-haze">+{stack.length - 6}</li>
+      )}
+    </ul>
+  </div>
+</article>

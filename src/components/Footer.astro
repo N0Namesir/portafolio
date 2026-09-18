@@ -1,13 +1,36 @@
 ---
+import { Mail, MapPin } from '@lucide/astro';
+import TechIcon from './TechIcon.astro';
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-border">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between text-sm text-muted">
-    <p>© {year} Eduardo Rivas · edurivas.dev</p>
-    <div class="flex gap-4">
-      <a href="https://github.com/N0Namesir" class="hover:text-fg transition-colors" rel="noopener" target="_blank">GitHub</a>
-      <a href="mailto:rivasmejiaeduardo@gmail.com" class="hover:text-fg transition-colors">Correo</a>
+<footer class="border-t border-grid/70 mt-24">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-10 grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
+    <div>
+      <p class="display text-2xl text-paper">Eduardo Rivas</p>
+      <p class="mt-2 text-haze flex items-center gap-2">
+        <MapPin size={16} class="text-signal shrink-0" />
+        San Miguel Tepezontes, El Salvador
+      </p>
+    </div>
+    <div class="flex flex-col sm:items-end gap-3 text-haze">
+      <div class="flex gap-2">
+        <a
+          href="https://github.com/N0Namesir"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-grid hover:border-signal hover:text-paper transition-colors"
+        >
+          <TechIcon name="GitHub" size={16} /> N0Namesir
+        </a>
+        <a
+          href="mailto:rivasmejiaeduardo@gmail.com"
+          class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-grid hover:border-signal hover:text-paper transition-colors"
+        >
+          <Mail size={16} /> Correo
+        </a>
+      </div>
+      <p class="text-sm">© {year} · edurivas.dev · Hecho con Astro</p>
     </div>
   </div>
 </footer>

@@ -1,0 +1,16 @@
+---
+import TechIcon from './TechIcon.astro';
+
+interface Props {
+  name: string;
+  size?: 'sm' | 'md';
+}
+
+const { name, size = 'sm' } = Astro.props;
+const pad = size === 'md' ? 'px-3 py-1.5 text-sm' : 'px-2.5 py-1 text-[13px]';
+---
+
+<li class:list={['inline-flex items-center gap-1.5 rounded-full border border-grid bg-night/60 text-haze', pad]}>
+  <TechIcon name={name} size={size === 'md' ? 15 : 13} class="text-paper/80" />
+  <span>{name}</span>
+</li>

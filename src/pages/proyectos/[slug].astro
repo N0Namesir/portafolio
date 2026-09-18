@@ -1,6 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { ArrowLeft, ExternalLink } from '@lucide/astro';
+import TechIcon from '../../components/TechIcon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TechChip from '../../components/TechChip.astro';
 
 export async function getStaticPaths() {
   const proyectos = await getCollection('proyectos');
@@ -10,35 +13,54 @@ export async function getStaticPaths() {
 const { proyecto } = Astro.props;
 const { Content } = await render(proyecto);
 const { nombre, descripcion, stack, github, url } = proyecto.data;
+const host = url ? new URL(url).host : undefined;
 ---
 
 <BaseLayout title={nombre} description={descripcion}>
-  <a href="/proyectos" class="text-sm text-muted hover:text-fg transition-colors">← Proyectos</a>
-  <h1 class="mt-4 text-3xl font-bold tracking-tight">{nombre}</h1>
-  <p class="mt-3 text-muted max-w-2xl">{descripcion}</p>
+  <div class="pt-10 sm:pt-14">
+    <a href="/proyectos" class="inline-flex items-center gap-1.5 text-haze hover:text-paper transition-colors">
+      <ArrowLeft size={16} /> Proyectos
+    </a>
+  </div>
 
-  <ul class="mt-4 flex flex-wrap gap-2">
-    {stack.map((tech) => (
-      <li class="font-mono text-xs px-2 py-0.5 rounded border border-border text-muted">{tech}</li>
-    ))}
-  </ul>
-
-  {(url || github) && (
-    <div class="mt-6 flex gap-3 text-sm">
-      {url && (
-        <a href={url} target="_blank" rel="noopener" class="rounded-md bg-accent text-bg font-medium px-3 py-1.5 hover:opacity-90 transition-opacity">
-          Ver sitio
-        </a>
-      )}
-      {github && (
-        <a href={github} target="_blank" rel="noopener" class="rounded-md border border-border px-3 py-1.5 hover:border-accent/60 transition-colors">
-          GitHub
-        </a>
+  <header class="mt-8 grid gap-10 lg:grid-cols-12">
+    <div class="lg:col-span-8">
+      <h1 class="display text-4xl sm:text-hero text-paper">{nombre}</h1>
+      <p class="mt-6 text-lg sm:text-xl text-haze max-w-[52ch]">{descripcion}</p>
+      {(url || github) && (
+        <div class="mt-8 flex flex-wrap gap-3">
+          {url && (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-lg bg-signal text-night font-semibold px-4 py-2.5 hover:bg-[#ffa066] transition-colors"
+            >
+              <ExternalLink size={16} /> {host}
+            </a>
+          )}
+          {github && (
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-lg border border-grid px-4 py-2.5 text-paper hover:border-signal transition-colors"
+            >
+              <TechIcon name="GitHub" size={16} /> Código
+            </a>
+          )}
+        </div>
       )}
     </div>
-  )}
+    <aside class="lg:col-span-4 rounded-2xl border border-grid bg-chart/60 p-6 self-start">
+      <p class="text-paper font-semibold">Stack</p>
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {stack.map((tech) => <TechChip name={tech} />)}
+      </ul>
+    </aside>
+  </header>
 
-  <article class="prose mt-10 max-w-2xl">
+  <article class="prose mt-14 max-w-[64ch] pb-8">
     <Content />
   </article>
 </BaseLayout>

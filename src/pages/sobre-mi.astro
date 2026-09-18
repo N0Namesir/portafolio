@@ -1,59 +1,77 @@
 ---
+import { GraduationCap, Users, Library } from '@lucide/astro';
+import TechIcon from '../components/TechIcon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TechChip from '../components/TechChip.astro';
 
-const stack = [
-  'Node.js',
-  'Astro',
-  'TypeScript',
-  'Tailwind CSS',
-  'Supabase',
-  'Docker',
-  'PM2',
-  'Bash',
-  'GitHub Actions',
+const stack = ['Node.js', 'Astro', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Docker', 'PM2', 'Bash', 'GitHub Actions'];
+
+const hitos = [
+  {
+    icon: GraduationCap,
+    titulo: 'Desarrollo de Software, INSAMT',
+    fecha: 'Tercer año de bachillerato, 2026',
+    texto:
+      'Instituto Nacional de San Miguel Tepezontes, El Salvador. Formación técnica en programación, bases de datos y despliegue.',
+  },
+  {
+    icon: Users,
+    titulo: 'Coordinador y administrador, The Monolith Project',
+    fecha: 'Equipo 4, Expotécnica',
+    texto:
+      'Coordino a un equipo académico de cinco personas y administro la organización de GitHub del proyecto EPI-Aetheris, con asesoría del Prof. William Mejía.',
+  },
+  {
+    icon: Library,
+    titulo: 'Muro Informativo',
+    fecha: 'infods.info, en producción',
+    texto:
+      'Diseño y mantenimiento de una biblioteca pública de recursos de aprendizaje con base de datos en Supabase y taxonomía cerrada de 34 subtags.',
+  },
 ];
 ---
 
 <BaseLayout title="Sobre mí">
-  <h1 class="text-3xl font-bold tracking-tight">Sobre mí</h1>
+  <section class="pt-16 sm:pt-24 pb-12">
+    <h1 class="display text-4xl sm:text-hero text-paper">Sobre mí</h1>
+    <p class="mt-8 text-lg sm:text-xl text-haze max-w-[52ch]">
+      Soy Eduardo Javier Rivas Mejía, <span class="text-paper">0V3R</span>. Me interesa el software simple, rápido
+      y bien documentado: sitios estáticos, automatización con scripts y despliegues reproducibles con contenedores.
+    </p>
+  </section>
 
-  <div class="mt-8 space-y-10 max-w-2xl">
-    <section class="space-y-4 text-muted leading-relaxed">
-      <p>
-        Soy Eduardo Javier Rivas Mejía, conocido como <span class="font-mono text-accent">0V3R</span>. Estudio
-        Desarrollo de Software en INSAMT (Instituto Nacional de San Miguel Tepezontes), El Salvador, donde curso el
-        tercer año de bachillerato.
-      </p>
-      <p>
-        Me interesa construir software simple, rápido y bien documentado: sitios estáticos, automatización con
-        scripts y despliegues reproducibles con contenedores.
-      </p>
-    </section>
-
-    <section>
-      <h2 class="text-xl font-semibold mb-3">Experiencia</h2>
-      <ul class="space-y-4 text-muted leading-relaxed">
-        <li>
-          <p class="text-fg font-medium">Coordinador y administrador · The Monolith Project</p>
-          <p>
-            Coordino al Equipo 4, un equipo académico de cinco personas, y administro la organización de GitHub del
-            proyecto EPI-Aetheris para Expotécnica.
-          </p>
-        </li>
-        <li>
-          <p class="text-fg font-medium">Muro Informativo · infods.info</p>
-          <p>Diseño y mantenimiento de una biblioteca pública de recursos de aprendizaje con base de datos en Supabase.</p>
-        </li>
-      </ul>
-    </section>
-
-    <section>
-      <h2 class="text-xl font-semibold mb-3">Stack</h2>
-      <ul class="flex flex-wrap gap-2">
-        {stack.map((tech) => (
-          <li class="font-mono text-xs px-2 py-1 rounded border border-border text-muted">{tech}</li>
+  <section class="grid gap-12 lg:grid-cols-12 py-8">
+    <div class="lg:col-span-7">
+      <h2 class="display text-2xl text-paper mb-8">Trayectoria</h2>
+      <ol class="relative border-l border-grid ml-3 space-y-10">
+        {hitos.map(({ icon: Icon, titulo, fecha, texto }) => (
+          <li class="pl-10 relative">
+            <span class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-night border border-grid flex items-center justify-center text-signal">
+              <Icon size={15} />
+            </span>
+            <p class="text-paper font-semibold text-lg leading-snug">{titulo}</p>
+            <p class="text-sm text-haze mt-1">{fecha}</p>
+            <p class="text-haze mt-3 max-w-[56ch]">{texto}</p>
+          </li>
         ))}
-      </ul>
-    </section>
-  </div>
+      </ol>
+    </div>
+
+    <aside class="lg:col-span-5 lg:pl-8">
+      <div class="rounded-2xl border border-grid bg-chart/60 p-6 sm:p-7 lg:sticky lg:top-24">
+        <h2 class="display text-2xl text-paper">Stack</h2>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          {stack.map((tech) => <TechChip name={tech} size="md" />)}
+        </ul>
+        <a
+          href="https://github.com/N0Namesir"
+          target="_blank"
+          rel="noopener"
+          class="mt-7 inline-flex items-center gap-2 text-paper hover:text-signal transition-colors"
+        >
+          <TechIcon name="GitHub" size={18} /> github.com/N0Namesir
+        </a>
+      </div>
+    </aside>
+  </section>
 </BaseLayout>

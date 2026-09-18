@@ -1,35 +1,103 @@
 ---
 import { getCollection } from 'astro:content';
+import { ArrowRight, GraduationCap, Users, Layers } from '@lucide/astro';
+import TechIcon from '../components/TechIcon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import ProjectPlate from '../components/ProjectPlate.astro';
+import Contours from '../components/Contours.astro';
+import TechChip from '../components/TechChip.astro';
 
 const proyectos = (await getCollection('proyectos')).sort((a, b) => a.data.orden - b.data.orden);
+const stack = ['Astro', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Docker', 'GitHub Actions'];
 ---
 
-<BaseLayout title="Inicio">
-  <section class="py-12 sm:py-20">
-    <p class="font-mono text-accent text-sm mb-3">Hola, soy</p>
-    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Eduardo Rivas</h1>
-    <p class="mt-4 text-lg text-muted max-w-2xl leading-relaxed">
-      Estudiante de desarrollo de software en El Salvador. Construyo sitios estáticos rápidos con Astro y
-      TypeScript, y coordino proyectos de equipo con Docker, Supabase y GitHub Actions.
-    </p>
-    <div class="mt-8 flex gap-3">
-      <a href="/proyectos" class="rounded-md bg-accent text-bg font-medium px-4 py-2 text-sm hover:opacity-90 transition-opacity">
-        Ver proyectos
-      </a>
-      <a href="/contacto" class="rounded-md border border-border px-4 py-2 text-sm hover:border-accent/60 transition-colors">
-        Contacto
-      </a>
+<BaseLayout title="Inicio" wide>
+  <section class="relative -mx-5 sm:-mx-8 px-5 sm:px-8 pt-16 sm:pt-24 pb-20 overflow-hidden">
+    <Contours class="pointer-events-none absolute inset-0 w-full h-full opacity-80" />
+
+    <div class="relative max-w-7xl mx-auto grid gap-12 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-8">
+        <p class="text-haze text-lg mb-5 flex items-center gap-2">
+          <span class="inline-block w-8 h-px bg-signal" aria-hidden="true"></span>
+          13.61° N, 88.92° O
+        </p>
+        <h1 class="display text-hero text-paper">
+          Eduardo<br />Rivas
+        </h1>
+        <p class="mt-8 text-lg sm:text-xl text-haze max-w-[46ch]">
+          Estudiante de desarrollo de software en El Salvador. Construyo sitios estáticos rápidos y coordino
+          proyectos de equipo que cruzan datos reales con mapas.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a
+            href="/proyectos"
+            class="inline-flex items-center gap-2 rounded-lg bg-signal text-night font-semibold px-5 py-3 hover:bg-[#ffa066] transition-colors"
+          >
+            Ver proyectos
+            <ArrowRight size={18} />
+          </a>
+          <a
+            href="https://github.com/N0Namesir"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-lg border border-grid bg-night/60 px-5 py-3 text-paper hover:border-signal transition-colors"
+          >
+            <TechIcon name="GitHub" size={18} />
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <dl class="lg:col-span-4 grid grid-cols-3 lg:grid-cols-1 gap-px bg-grid rounded-xl overflow-hidden border border-grid">
+        <div class="bg-chart p-4 sm:p-5">
+          <dt class="text-haze text-sm flex items-center gap-2"><GraduationCap size={15} class="text-signal" /> Formación</dt>
+          <dd class="mt-1 text-paper font-semibold">INSAMT, 3.er año</dd>
+        </div>
+        <div class="bg-chart p-4 sm:p-5">
+          <dt class="text-haze text-sm flex items-center gap-2"><Users size={15} class="text-signal" /> Rol</dt>
+          <dd class="mt-1 text-paper font-semibold">Coordinador, Equipo 4</dd>
+        </div>
+        <div class="bg-chart p-4 sm:p-5">
+          <dt class="text-haze text-sm flex items-center gap-2"><Layers size={15} class="text-signal" /> Alias</dt>
+          <dd class="mt-1 text-paper font-semibold">0V3R</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
-  <section class="py-8">
-    <h2 class="text-2xl font-semibold mb-6">Proyectos destacados</h2>
-    <div class="grid gap-4 sm:grid-cols-2">
-      {proyectos.map((p) => (
-        <ProjectCard slug={p.id} nombre={p.data.nombre} descripcion={p.data.descripcion} stack={p.data.stack} />
+  <section class="max-w-7xl mx-auto py-8">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <h2 class="display text-3xl text-paper">Proyectos</h2>
+      <a href="/proyectos" class="inline-flex items-center gap-1.5 text-haze hover:text-signal transition-colors">
+        Ver todos <ArrowRight size={16} />
+      </a>
+    </div>
+    <div class="grid gap-5">
+      {proyectos.map((p, i) => (
+        <ProjectPlate
+          slug={p.id}
+          nombre={p.data.nombre}
+          descripcion={p.data.descripcion}
+          stack={p.data.stack}
+          url={p.data.url}
+          flip={i % 2 === 1}
+        />
       ))}
     </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto py-16 grid gap-8 md:grid-cols-12 md:items-center">
+    <div class="md:col-span-5">
+      <h2 class="display text-3xl text-paper">Con qué trabajo</h2>
+      <p class="mt-4 text-haze max-w-[40ch]">
+        Herramientas que uso a diario, desde el sitio estático hasta el despliegue en contenedores.
+      </p>
+      <a href="/sobre-mi" class="mt-6 inline-flex items-center gap-1.5 text-paper hover:text-signal transition-colors">
+        Más sobre mí <ArrowRight size={16} />
+      </a>
+    </div>
+    <ul class="md:col-span-7 flex flex-wrap gap-2.5">
+      {stack.map((tech) => <TechChip name={tech} size="md" />)}
+    </ul>
   </section>
 </BaseLayout>

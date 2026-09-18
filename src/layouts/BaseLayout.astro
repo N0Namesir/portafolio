@@ -6,9 +6,14 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  wide?: boolean;
 }
 
-const { title, description = 'Portafolio de Eduardo Rivas (0V3R), estudiante de desarrollo de software en El Salvador.' } = Astro.props;
+const {
+  title,
+  description = 'Portafolio de Eduardo Rivas (0V3R), estudiante de desarrollo de software en El Salvador.',
+  wide = false,
+} = Astro.props;
 const fullTitle = title === 'Inicio' ? 'Eduardo Rivas · 0V3R' : `${title} · Eduardo Rivas`;
 ---
 
@@ -18,16 +23,23 @@ const fullTitle = title === 'Inicio' ? 'Eduardo Rivas · 0V3R' : `${title} · Ed
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#0f1b2d" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap"
+    />
     <title>{fullTitle}</title>
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
-    <main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-12">
+    <main class:list={['flex-1 w-full mx-auto px-5 sm:px-8', wide ? 'max-w-7xl' : 'max-w-5xl']}>
       <slot />
     </main>
     <Footer />

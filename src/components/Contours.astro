@@ -1,0 +1,28 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 900 600"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+>
+  <g>
+    <path class="contour" d="M-20 420 C 120 380, 180 300, 320 310 S 520 400, 660 350 S 860 250, 940 280" />
+    <path class="contour" d="M-20 470 C 140 430, 200 340, 340 350 S 540 440, 680 390 S 880 300, 940 330" />
+    <path class="contour" d="M-20 520 C 160 480, 220 380, 360 390 S 560 480, 700 430 S 900 350, 940 380" />
+    <path class="contour" d="M-20 570 C 180 530, 240 420, 380 430 S 580 520, 720 470 S 920 400, 940 430" />
+    <path class="contour" d="M200 40 C 300 20, 380 80, 420 150 S 380 280, 470 300 S 640 260, 700 180 S 780 40, 940 60" />
+    <path class="contour" d="M240 -10 C 340 -20, 420 50, 460 120 S 420 250, 510 270 S 680 230, 740 150 S 820 10, 940 20" />
+    <path class="contour" d="M540 -20 C 600 60, 560 140, 620 200 S 760 240, 800 320 S 760 460, 900 520" />
+    <path class="contour" d="M600 -20 C 660 60, 620 140, 680 200 S 820 240, 860 320 S 820 460, 940 500" />
+  </g>
+  <g transform="translate(700 120)">
+    <circle class="pin-ring" r="10" fill="none" stroke="var(--color-signal)" stroke-width="1.5" />
+    <circle r="5" fill="var(--color-signal)" />
+  </g>
+</svg>
