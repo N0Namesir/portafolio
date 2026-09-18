@@ -1,0 +1,25 @@
+---
+const inputClass =
+  'w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-fg placeholder:text-muted focus:outline-none focus:border-accent';
+---
+
+<form action="mailto:3duardorivasme@gmail.com" method="post" enctype="text/plain" class="space-y-4 max-w-lg">
+  <div>
+    <label for="nombre" class="block text-sm text-muted mb-1">Nombre</label>
+    <input id="nombre" name="nombre" type="text" required class={inputClass} />
+  </div>
+  <div>
+    <label for="correo" class="block text-sm text-muted mb-1">Correo</label>
+    <input id="correo" name="correo" type="email" required class={inputClass} />
+  </div>
+  <div>
+    <label for="mensaje" class="block text-sm text-muted mb-1">Mensaje</label>
+    <textarea id="mensaje" name="mensaje" rows="5" required class={inputClass}></textarea>
+  </div>
+  <button
+    type="submit"
+    class="rounded-md bg-accent text-bg font-medium px-4 py-2 text-sm hover:opacity-90 transition-opacity"
+  >
+    Enviar
+  </button>
+</form>

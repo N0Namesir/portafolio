@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const proyectos = (await getCollection('proyectos')).sort((a, b) => a.data.orden - b.data.orden);
+---
+
+<BaseLayout title="Proyectos" description="Proyectos de Eduardo Rivas: Muro Informativo, EPI-Aetheris y más.">
+  <h1 class="text-3xl font-bold tracking-tight">Proyectos</h1>
+  <p class="mt-3 text-muted max-w-2xl">Trabajos personales y de equipo en los que he participado.</p>
+  <div class="mt-8 grid gap-4 sm:grid-cols-2">
+    {proyectos.map((p) => (
+      <ProjectCard slug={p.id} nombre={p.data.nombre} descripcion={p.data.descripcion} stack={p.data.stack} />
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const stack = [
+  'Node.js',
+  'Astro',
+  'TypeScript',
+  'Tailwind CSS',
+  'Supabase',
+  'Docker',
+  'PM2',
+  'Bash',
+  'GitHub Actions',
+];
+---
+
+<BaseLayout title="Sobre mí">
+  <h1 class="text-3xl font-bold tracking-tight">Sobre mí</h1>
+
+  <div class="mt-8 space-y-10 max-w-2xl">
+    <section class="space-y-4 text-muted leading-relaxed">
+      <p>
+        Soy Eduardo Javier Rivas Mejía, conocido como <span class="font-mono text-accent">0V3R</span>. Estudio
+        Desarrollo de Software en INSAMT (Instituto Nacional de San Miguel Tepezontes), El Salvador, donde curso el
+        tercer año de bachillerato.
+      </p>
+      <p>
+        Me interesa construir software simple, rápido y bien documentado: sitios estáticos, automatización con
+        scripts y despliegues reproducibles con contenedores.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-3">Experiencia</h2>
+      <ul class="space-y-4 text-muted leading-relaxed">
+        <li>
+          <p class="text-fg font-medium">Coordinador y administrador · The Monolith Project</p>
+          <p>
+            Coordino al Equipo 4, un equipo académico de cinco personas, y administro la organización de GitHub del
+            proyecto EPI-Aetheris para Expotécnica.
+          </p>
+        </li>
+        <li>
+          <p class="text-fg font-medium">Muro Informativo · infods.info</p>
+          <p>Diseño y mantenimiento de una biblioteca pública de recursos de aprendizaje con base de datos en Supabase.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-3">Stack</h2>
+      <ul class="flex flex-wrap gap-2">
+        {stack.map((tech) => (
+          <li class="font-mono text-xs px-2 py-1 rounded border border-border text-muted">{tech}</li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

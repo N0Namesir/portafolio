@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout title="Contacto">
+  <h1 class="text-3xl font-bold tracking-tight">Contacto</h1>
+  <p class="mt-3 text-muted max-w-2xl">
+    Puedes escribirme por correo o usar el formulario. También estoy en GitHub.
+  </p>
+
+  <div class="mt-8 grid gap-10 md:grid-cols-[1fr_auto]">
+    <ContactForm />
+    <ul class="space-y-2 text-sm">
+      <li>
+        <span class="text-muted">Correo · </span>
+        <a href="mailto:3duardorivasme@gmail.com" class="hover:text-accent transition-colors">3duardorivasme@gmail.com</a>
+      </li>
+      <li>
+        <span class="text-muted">GitHub · </span>
+        <a href="https://github.com/0V3R" target="_blank" rel="noopener" class="hover:text-accent transition-colors">0V3R</a>
+      </li>
+    </ul>
+  </div>
+</BaseLayout>

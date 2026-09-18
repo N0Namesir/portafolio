@@ -5,3 +5,8 @@ AGENTS.md
 
 /contexto
 contexto
+
+# build
+node_modules
+dist
+.astro
